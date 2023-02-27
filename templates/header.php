@@ -1,9 +1,23 @@
 <?php
 
-    require_once("db.php");
-    require_once("globals.php");
+    ini_set('display_errors', '1');
+    ini_set('display_startup_errors', '1');
+    error_reporting(E_ALL);
 
-    $flassMessage = [];
+    require_once("globals.php");
+    require_once("db.php");
+    require_once("models/Message.php");
+
+    $message = new Message($BASE_URL);
+
+    $userDao = new UserDAO($conn, $BASE_URL);
+
+    $flassMessage = $message->getMessage();
+
+    if(!empty($flassMessage["msg"])){
+        //Limpar a mensagem
+        $message->clearMessage();
+    }
 
 ?>
 
@@ -48,8 +62,8 @@
         </nav>
     </header>
 
-    <?php if(!empty($flassMessage["msg"])): ?>
-        <div class="msg-container">
-            <p class="msg <?= $flassMessage["type"]?>"> <?= $flassMessage["msg"]?></p>
-        </div>
-    <?php endif; ?>
+<?php if(!empty($flassMessage["msg"])): ?>
+    <div class="msg-container">
+        <p class="msg <?= $flassMessage["type"]?>"><?= $flassMessage["msg"]?></p>
+    </div>
+<?php endif; ?>

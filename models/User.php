@@ -11,8 +11,17 @@
         public $bio;
         public $token;
 
+        public function generateToken(){
+            return bin2hex(random_bytes(50));
+        }
+
+        public function generatePassword(){
+            return password_hash($password, PASSWORD_DEFAULT);
+        }
+
     }
 
+    //DAO apenas para interação no banco de dados
     interface UserDAOInterface{
 
         public function buildUser($data);
@@ -25,4 +34,5 @@
         public function findById($id);
         public function findByToken($token);
         public function changePassword(User $user);
+        public function destroyToken();
     }

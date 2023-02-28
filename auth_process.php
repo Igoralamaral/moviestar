@@ -20,21 +20,35 @@
         $lastname = filter_input(INPUT_POST, "lastname");
         $email = filter_input(INPUT_POST, "email");
         $password = filter_input(INPUT_POST, "password");
-        $confirmPassword = filter_input(INPUT_POST, "confirmPassword");
+        $confirmpassword = filter_input(INPUT_POST, "confirmpassword");
 
         //Verificação de dados mínimos
         if($name && $lastname && $email && $password){
             //Verificar se as senhas são iguais
             if($password === $confirmpassword){
 
-                //Verificar se o e-mail já está cadastrado no sistema
+                //Verificar se o e-mail está cadastrado no sistema
                 if($userDao->findByEmail($email) === false){
-                    echo "Nenhum usuário foi encontrado";
+                    $user = new User();
+                    //Criação de token e senha
+                    $userToken = $user->generateToken();
+                    $finalPassword = $user->generatePassword($password);
+                    
+                    $user->name = $name;
+                    $user->lastname = $lastname;
+                    $user->email = $email;
+                    $user->password = $finalPassword; 
+                    $user->token = $userToken;
+
+                    $auth = true;
+
+                    $userDao->create($user, $auth);
+
                 }else{
                     //Enviar mensagem caso as senhas não sejam iguais
-                    $message->setMessage("Usuário já cadastrado, tente outro e-mail.", "error", "back");
-                 }
-
+                    $message->setMessage("Usuário já cadastrado, tente outro e-mail", "error", "back");
+                }
+            
             }else{
                 //Enviar mensagem caso as senhas não sejam iguais
                 $message->setMessage("As senhas não são iguais.", "error", "back");

@@ -7,7 +7,7 @@
 
     $userDao = new UserDAO($conn, $BASE_URL);
 
-    $userData = $userDao->verifyToken(true);
+    $userData = $userDao->verifyToken(true); 
 
     $fullName = $user->getFullName($userData);
 

@@ -5,7 +5,7 @@
         public $id;
         public $name;
         public $lastname;
-        public $email;
+        public $email;  
         public $password;
         public $image;
         public $bio;
@@ -15,7 +15,7 @@
             return bin2hex(random_bytes(50));
         }
 
-        public function generatePassword(){
+        public function generatePassword($password){
             return password_hash($password, PASSWORD_DEFAULT);
         }
 
@@ -23,6 +23,10 @@
             return $user->name . " " . $user->lastname;
         }
 
+        public function imageGenerateName() {
+            return bin2hex(random_bytes(60)) . ".jpg";
+          }
+      
     }
 
     //DAO apenas para interação no banco de dados

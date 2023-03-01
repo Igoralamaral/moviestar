@@ -36,7 +36,7 @@
                             <label for="email">E-mail:</label>
                             <input type="text" readonly class="form-control disabled" id="email" name="email" placeholder="Edite seu nome" value="<?= $userData->email ?>">
                         </div>
-                        <input type="submti" class="btn card-btn btn-edit" value="Alterar">
+                        <input type="submit" class="btn card-btn btn-edit" value="Alterar">
                     </div>
                     <div class="col-md-4">
                         <!--a imagem será um background da div-->

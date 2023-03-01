@@ -29,7 +29,9 @@
 
                 //Verificar se o e-mail está cadastrado no sistema
                 if($userDao->findByEmail($email) === false){
+
                     $user = new User();
+                    
                     //Criação de token e senha
                     $userToken = $user->generateToken();
                     $finalPassword = $user->generatePassword($password);

@@ -1,7 +1,7 @@
 <?php
     require_once("templates/header.php");
-    require_once("dao/UserDAO.php");
     require_once("models/User.php");
+    require_once("dao/UserDAO.php");
 
     $user = new User();
 

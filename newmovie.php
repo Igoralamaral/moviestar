@@ -1,7 +1,7 @@
 <?php
 require_once("templates/header.php");
 
-//Verifica se o usuário está autenticado
+// Verifica se o usuário está autenticado
 require_once("models/User.php");
 require_once("dao/UserDAO.php");
 

@@ -1,32 +1,33 @@
 <?php
 
-    ini_set('display_errors', '1');
-    ini_set('display_startup_errors', '1');
-    error_reporting(E_ALL);
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 
-    require_once("globals.php");
-    require_once("db.php");
-    require_once("models/Message.php");
-    require_once("dao/UserDAO.php");
+require_once("globals.php");
+require_once("db.php");
+require_once("models/Message.php");
+require_once("dao/UserDAO.php");
 
-    $message = new Message($BASE_URL);
+$message = new Message($BASE_URL);
 
-    $flassMessage = $message->getMessage();
+$flassMessage = $message->getMessage();
 
-    if(!empty($flassMessage["msg"])){
-        //Limpar a mensagem
-        $message->clearMessage();
-    }
+if (!empty($flassMessage["msg"])) {
+    //Limpar a mensagem
+    $message->clearMessage();
+}
 
-    $userDao = new UserDAO($conn, $BASE_URL);
+$userDao = new UserDAO($conn, $BASE_URL);
 
-    $userData = $userDao->verifyToken(false);
+$userData = $userDao->verifyToken(false);
 
-    
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,6 +41,7 @@
     <!--CSS PROJECT-->
     <link rel="stylesheet" href="<?= $BASE_URL ?>css/styles.css">
 </head>
+
 <body>
     <header>
         <nav id="main-navbar" class="navbar navbar-expand-lg">
@@ -58,7 +60,7 @@
             </form>
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="navbar-nav">
-                    <?php if($userData) : ?>
+                    <?php if ($userData) : ?>
                         <li class="nav-item">
                             <a href="<?= $BASE_URL ?>newmovie.php" class="nav-link">
                                 <i class="fa-regular fa-square-plus"></i>Incluir Filme
@@ -84,12 +86,12 @@
 
                     <?php endif; ?>
                 </ul>
-            </div>  
+            </div>
         </nav>
     </header>
 
-<?php if(!empty($flassMessage["msg"])): ?>
-    <div class="msg-container">
-        <p class="msg <?= $flassMessage["type"]?>"><?= $flassMessage["msg"]?></p>
-    </div>
-<?php endif; ?>
+    <?php if (!empty($flassMessage["msg"])) : ?>
+        <div class="msg-container">
+            <p class="msg <?= $flassMessage["type"] ?>"><?= $flassMessage["msg"] ?></p>
+        </div>
+    <?php endif; ?>

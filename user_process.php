@@ -50,10 +50,10 @@ if ($type === "update") {
     $imageName = bin2hex(random_bytes(16)) . $image_extension;
 
     move_uploaded_file(
-      //Temp image location
+      // Local da imagem temporária
       $image["tmp_name"],
 
-      //New image location
+      // Novo local da imagem
       __DIR__ . "/img/users/" . $imageName
     );
 

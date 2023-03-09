@@ -11,15 +11,15 @@ $message = new Message($BASE_URL);
 $userDao = new UserDAO($conn, $BASE_URL);
 $movieDao = new MovieDAO($conn, $BASE_URL);
 
-//Resgata o tipo do formulário
+// Resgata o tipo do formulário
 $type = filter_input(INPUT_POST, "type");
 
-//Resgata dados do usuários
+// Resgata dados do usuários
 $userData = $userDao->verifyToken();
 
 if ($type === "create") {
 
-    //Receber os dados do input
+    // Receber os dados do input
     $title = filter_input(INPUT_POST, "title");
     $description = filter_input(INPUT_POST, "description");
     $trailer = filter_input(INPUT_POST, "trailer");
@@ -28,7 +28,7 @@ if ($type === "create") {
 
     $movie = new Movie();
 
-    //Validação mínima de dados
+    // Validação mínima de dados
     if (!empty($title) && !empty($description) && !empty($category)) {
 
         $movie->title = $title;
@@ -38,40 +38,37 @@ if ($type === "create") {
         $movie->length = $length;
         $movie->users_id = $userData->id;
 
-        //Upload de imagem do filme
-        if (isset($FILES["image"]) && !empty($FILES["image"]["tmp_name"])) {
-
+        // Upload da imagem
+        if (isset($_FILES["image"]) && !empty($_FILES["image"]["tmp_name"])) {
             $image = $_FILES["image"];
-            $imageTypes = ["image/jpeg", "image/jpg", "image/png"];
-            $jpgArray = ["image/jpeg", "image/jpg"];
 
-            //Checando tipo da imagem
-            if (in_array($image["type"], $imageTypes)) {
+            // Sair se não for um arquivo de imagem válido
+            $image_type = exif_imagetype($image["tmp_name"]);
 
-                //Checar se imagem é jpeg
-                if (in_array($image["type"], $jpgArray)) {
-
-                    $imageFile = imagecreatefromjpeg($image["tmp_name"]);
-                } else {
-
-                    $imageFile = imagecreatefrompng($image["tmp_name"]);
-                }
-
-                //Gerando nome da imagem
-                $imageName = $movie->imageGenerateName();
-
-                imagejpeg($imageFile . "./img/movies/" . $imageName, 100);
-
-                $movie->image = $imageName;
-            } else {
-
+            if (!$image_type) {
                 $message->setMessage("Tipo inválido de imagem, insira png ou jpg!", "error", "back");
             }
-        }
 
-        print_r($_POST);
-        print_r($_FILES);
-        exit;
+            // Pegar a extensão baseada no tipo do arquivo
+            $image_extension = image_type_to_extension($image_type, true);
+
+            // Gerar um nome de imagem unico
+            $imageName = bin2hex(random_bytes(16)) . $image_extension;
+
+            move_uploaded_file(
+                // Local da imagem temporária
+                $image["tmp_name"],
+
+                // Novo local da imagem
+                __DIR__ . "/img/movies/" . $imageName
+            );
+
+            if (!isset($image)) {
+                $message->setMessage("Nenhum arquivo de imagem enviado!", "error", "back");
+            }
+
+            $movie->image = $imageName;
+        }
 
         $movieDao->create($movie);
     } else {

@@ -12,8 +12,9 @@
     $fullName = $user->getFullName($userData);
 
     if($userData->image == ""){
-       $userData->image = "user.png"; 
-    }
+        $userData->image = "user.png"; 
+     }
+    
 ?>
 
     <div id="main-container" class="container-fluid edit-profile-page">
@@ -36,7 +37,7 @@
                             <label for="email">E-mail:</label>
                             <input type="text" readonly class="form-control disabled" id="email" name="email" placeholder="Edite seu nome" value="<?= $userData->email ?>">
                         </div>
-                        <input type="submit" class="btn card-btn btn-edit" value="Alterar">
+                        <input type="submit" class="btn card-btn margin-btn" value="Alterar">
                     </div>
                     <div class="col-md-4">
                         <!--a imagem será um background da div-->
@@ -66,7 +67,7 @@
                             <label for="confirmpassword">Confirme sua senha:</label>
                             <input type="text" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Confirme sua nova senha">
                         </div>
-                        <input type="submit" class="btn card-btn btn-edit-password" value="Alterar Senha">
+                        <input type="submit" class="btn card-btn margin-btn" value="Alterar Senha">
                     </form>
                 </div>
             </div>

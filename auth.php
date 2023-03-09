@@ -17,7 +17,7 @@
                         <label for="password">Senha:</label>
                         <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha">
                     </div>
-                    <input type="submit" class="btn card-btn btn-login" value="Entrar">
+                    <input type="submit" class="btn card-btn margin-btn" value="Entrar">
                 </form>
             </div>
             <div class="col-md-4" id="register-container">
@@ -44,7 +44,7 @@
                         <label for="confirmpassword">Confirmação de Senha:</label>
                         <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Confirme sua senha">
                     </div>
-                    <input type="submit" class="btn card-btn btn-register" value="Registrar">
+                    <input type="submit" class="btn card-btn margin-btn" value="Registrar">
                 </form>
             </div>
         </div>

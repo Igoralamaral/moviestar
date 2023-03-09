@@ -1,0 +1,7 @@
+{
+  "editor.formatOnSave": true,
+  "prettier.tabWidth": 4,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnPaste": true,
+  "php.validate.run": "onType"
+}

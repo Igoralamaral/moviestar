@@ -34,11 +34,11 @@ $userData = $userDao->verifyToken(true);
                 <label for="category">Categoria:</label>
                 <select name="category" id="category" class="form-control">
                     <option value="">Selecione</option>
-                    <option value="Ação">Ação</optiond>
-                    <option value="Drama">Drama</optiond>
-                    <option value="Comédia">Comédia</optiond>
-                    <option value="Fantasia/Ficção">Fantasia/Ficção</optiond>
-                    <option value="Romance">Romance</optiond>
+                    <option value="Ação">Ação</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Comédia">Comédia</option>
+                    <option value="Fantasia/Ficção">Fantasia/Ficção</option>
+                    <option value="Romance">Romance</option>
                 </select>
             </div>
             <div class="form-group">

@@ -67,7 +67,7 @@ $alreadyReviewd = false;
                 <div class="col-md-12" id="review-form-container">
                     <h4>Envie sua avaliação:</h4>
                     <p class="page-description">Preencha o formulário com a nota e o comentário sobre o filme</p>
-                    <form action="<?= $BASE_URL ?>review_process" id="review-form" method="POST">
+                    <form action="<?= $BASE_URL ?>review_process.php" id="review-form" method="POST">
                         <input type="hidden" name="type" value="create">
                         <input type="hidden" name="movies_id" value="<?= $movie->id ?>">
                         <div class="form-group">

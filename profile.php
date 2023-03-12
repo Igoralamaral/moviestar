@@ -62,7 +62,7 @@ $userMovies = $movieDao->getMoviesByUserId($id);
                         <?php require("templates/movie_card.php"); ?>
                     <?php endforeach; ?>
                     <?php if (count($userMovies) === 0) : ?>
-                        <p class="empty-list">O usuário inda não enviou filmes!</p>
+                        <p class="empty-list">O usuário ainda não enviou filmes!</p>
                     <?php endif; ?>
                 </div>
             </div>
